@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,9 +13,15 @@ public class Main {
 //        System.out.println(determineGroup(77));
 //        System.out.println(isWeekend("Sunday"));
 //        System.out.println(checkWeekend("Sunday"));
-        int arr[] = new int[]{1, 3, 5, 6, 9, 11, 24};
+        int arr[] = new int[]{1,2,3,4,5,5,6,7,7};
+//        int arr2[] = new int[]{1, 2, 4};
 //        printArray(arr);
-        getSubArrayBetween(arr, 4, 10);
+//        printArray(arr2);
+//        getSubArrayBetween(arr, 4, 10);
+//        getArrayMiddle(arr);
+//        inverseArray(arr);
+//        mergeAndSort(arr, arr2);
+        printArrayClass(arr);
     }
 
     public static boolean doubleExpression(double a, double b, double c) {
@@ -157,5 +164,81 @@ public class Main {
         }
 
         return result;
+    }
+
+    public static int[] getArrayMiddle(int[] numbers) {
+        boolean isEmpty = numbers.length == 0;
+        if (isEmpty) {
+            return numbers;
+        }
+        int counter = numbers.length;
+        int halfArray = numbers.length / 2;
+        int size = 0;
+
+        if (counter % 2 == 0) {
+            size = 2;
+        } else {
+            size = 1;
+        }
+
+        int[] res = new int[size];
+        int index = 0;
+        for (int i = 0; i < res.length; i++) {
+            if (size == 2) {
+                res[index] = numbers[halfArray - 1];
+                res[index + 1] = numbers[halfArray];
+            } else {
+                res[index] = numbers[halfArray];
+            }
+        }
+        for (int a : res) {
+            System.out.print(a + " ");
+        }
+        return res;
+    }
+
+    public static int[] inverseArray(int[] numbers) {
+        int[] res = new int[numbers.length];
+        for (int i = 0, j = res.length - 1; i < numbers.length; i++, j--) {
+            res[j] = numbers[i];
+        }
+        for (int a : res) {
+            System.out.print(a + " ");
+        }
+        return res;
+    }
+
+    public static int[] mergeAndSort(int[] firstArray, int[] secondArray) {
+        int[] res = new int[firstArray.length + secondArray.length];
+        int count = 0;
+        for (int i = 0; i < firstArray.length; i++) {
+            res[i] = firstArray[i];
+            count++;
+        }
+        for (int i = 0; i < secondArray.length; i++) {
+            res[count++] = secondArray[i];
+        }
+
+        int temp;
+        boolean isFiltred = false;
+        while (!isFiltred) {
+            isFiltred = true;
+            for (int i = 0; i < res.length - 1; i++) {
+                if (res[i] > res[i + 1]) {
+                    isFiltred = false;
+                    temp = res[i];
+                    res[i] = res[i + 1];
+                    res[i + 1] = temp;
+                }
+            }
+        }
+        for (int a : res) {
+            System.out.print(a + " ");
+        }
+        return res;
+    }
+
+    public static void printArrayClass(int[] numbers) {
+        System.out.println(Arrays.toString(numbers));
     }
 }
