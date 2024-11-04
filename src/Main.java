@@ -1,3 +1,4 @@
+import javax.script.ScriptEngine;
 import java.math.BigInteger;
 import java.util.Arrays;
 
@@ -13,8 +14,7 @@ public class Main {
 //        System.out.println(determineGroup(77));
 //        System.out.println(isWeekend("Sunday"));
 //        System.out.println(checkWeekend("Sunday"));
-        int arr[] = new int[]{1,2,3,4,5,5,6,7,7};
-//        int arr2[] = new int[]{1, 2, 4};
+        int arr[] = new int[]{};
 //        printArray(arr);
 //        printArray(arr2);
 //        getSubArrayBetween(arr, 4, 10);
@@ -22,6 +22,10 @@ public class Main {
 //        inverseArray(arr);
 //        mergeAndSort(arr, arr2);
         printArrayClass(arr);
+//        printArrayClass(arr2);
+//        getArrayMiddleClass(arr);
+//        mergeAndSortClass(arr, arr2);
+        printOddNumbers(arr);
     }
 
     public static boolean doubleExpression(double a, double b, double c) {
@@ -240,5 +244,77 @@ public class Main {
 
     public static void printArrayClass(int[] numbers) {
         System.out.println(Arrays.toString(numbers));
+    }
+
+    public static int[] getArrayMiddleClass(int[] numbers) {
+        boolean isEmpty = numbers.length == 0;
+        if (isEmpty) {
+            return numbers;
+        }
+        int counter = numbers.length;
+        int size = 0;
+        if (counter % 2 == 0) {
+            size = 2;
+        } else {
+            size = 1;
+        }
+        int[] res = new int[size];
+        if (size == 2) {
+            System.arraycopy(numbers, numbers.length / 2 - 1, res, 0, size);
+        } else {
+            System.arraycopy(numbers, numbers.length / 2, res, 0, size);
+        }
+        System.out.println(Arrays.toString(res));
+        return res;
+    }
+
+    public static int[] mergeAndSortClass(int[] firstArray, int[] secondArray) {
+        int[] res = new int[firstArray.length + secondArray.length];
+        System.arraycopy(firstArray, 0, res, 0, firstArray.length);
+        System.arraycopy(secondArray, 0, res, firstArray.length, secondArray.length);
+        Arrays.sort(res);
+        return res;
+    }
+
+    public static void printOddNumbers(int[] arr) {
+        boolean isEmpty = arr.length == 0;
+        if (isEmpty){
+            for (int a : arr) {
+                System.out.println(a);
+            }
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] % 2 != 0) {
+                    sb.append(arr[i]);
+                    sb.append(", ");
+                }
+            }
+            sb.deleteCharAt(sb.length() - 2);
+            System.out.println(sb);
+        }
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < arr.length; i++) {
+//            if (arr[i] % 2 != 0) {
+//                sb.append(arr[i]);
+//                sb.append(", ");
+//            }
+//        }
+//        if (isEmpty) {
+//            for (int a : arr) {
+//                System.out.println(a);
+//            }
+//        } else {
+//            sb.deleteCharAt(sb.length() - 2);
+//            System.out.println(sb);
+//        }
+
+//        boolean isEmpty = arr.length == 0;
+//        String s = "";
+//        for (int i = 0; i < arr.length; i++) {
+//            if (arr[i] % 2 == 0) {
+//                System.out.print(arr[i] + " ");
+//            }
+//        }
     }
 }
