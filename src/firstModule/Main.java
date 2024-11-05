@@ -1,3 +1,5 @@
+package firstModule;
+
 import javax.script.ScriptEngine;
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -15,13 +17,13 @@ public class Main {
 //        System.out.println(isWeekend("Sunday"));
 //        System.out.println(checkWeekend("Sunday"));
         int arr[] = new int[]{13,-25,-13,91,99};
-//        printArray(arr);
+        printArray(arr);
 //        printArray(arr2);
 //        getSubArrayBetween(arr, 4, 10);
 //        getArrayMiddle(arr);
 //        inverseArray(arr);
 //        mergeAndSort(arr, arr2);
-        printArrayClass(arr);
+//        printArrayClass(arr);
 //        printArrayClass(arr2);
 //        getArrayMiddleClass(arr);
 //        mergeAndSortClass(arr, arr2);
