@@ -14,7 +14,7 @@ public class Main {
 //        System.out.println(determineGroup(77));
 //        System.out.println(isWeekend("Sunday"));
 //        System.out.println(checkWeekend("Sunday"));
-        int arr[] = new int[]{};
+        int arr[] = new int[]{13,-25,-13,91,99};
 //        printArray(arr);
 //        printArray(arr2);
 //        getSubArrayBetween(arr, 4, 10);
@@ -278,19 +278,17 @@ public class Main {
 
     public static void printOddNumbers(int[] arr) {
         boolean isEmpty = arr.length == 0;
-        if (isEmpty){
-            for (int a : arr) {
-                System.out.println(a);
-            }
-        } else {
+        if (!isEmpty) {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < arr.length; i++) {
                 if (arr[i] % 2 != 0) {
                     sb.append(arr[i]);
-                    sb.append(", ");
+                    sb.append(",");
                 }
             }
-            sb.deleteCharAt(sb.length() - 2);
+            if (sb.length() > 0) {
+                sb.delete(sb.length() - 1, sb.length());
+            }
             System.out.println(sb);
         }
 //        StringBuilder sb = new StringBuilder();
