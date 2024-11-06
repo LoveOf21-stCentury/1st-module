@@ -3,6 +3,8 @@ package firstModule;
 import javax.script.ScriptEngine;
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,8 +18,8 @@ public class Main {
 //        System.out.println(determineGroup(77));
 //        System.out.println(isWeekend("Sunday"));
 //        System.out.println(checkWeekend("Sunday"));
-        int arr[] = new int[]{13,-25,-13,91,99};
-        printArray(arr);
+//        int arr[] = new int[]{13,-25,-13,91,99};
+//        printArray(arr);
 //        printArray(arr2);
 //        getSubArrayBetween(arr, 4, 10);
 //        getArrayMiddle(arr);
@@ -27,7 +29,21 @@ public class Main {
 //        printArrayClass(arr2);
 //        getArrayMiddleClass(arr);
 //        mergeAndSortClass(arr, arr2);
-        printOddNumbers(arr);
+//        printOddNumbers(arr);
+//        parseAndPrintNumber("6");
+//        System.out.println(isPalindrome("A palindrome is a word, number, phrase, or other sequence of characters which reads the same backward as forward, such as madam or racecar or the number 10801"));
+//        System.out.println(isGmailOrOutlook("kata@yandex.com"));
+        String[] roles = new String[]{"Городничий", "Аммос Федорович", "Артемий Филиппович", "Лука Лукич"};
+        String[] textLines = new String[]{"Городничий: Я пригласил вас, господа, с тем, чтобы сообщить вам пренеприятное известие: к нам едет ревизор."
+                , "Аммос Федорович: Как ревизор?"
+                , "Артемий Филиппович: Как ревизор?"
+                , "Лука: Тра ля ля, тарам-парам"
+                , "Городничий: Ревизор из Петербурга, инкогнито. И еще с секретным предписаньем."
+                , "Аммос Федорович: Вот те на!", "Артемий Филиппович: Вот не было заботы, так подай!"
+                , "Лука Лукич: Господи боже! еще и с секретным предписаньем!", "Лука Лукич: Господи боже! Лука: еще и с секретным предписаньем!"};
+
+        System.out.println(printTextPerRole(roles, textLines));
+
     }
 
     public static boolean doubleExpression(double a, double b, double c) {
@@ -316,5 +332,111 @@ public class Main {
 //                System.out.print(arr[i] + " ");
 //            }
 //        }
+    }
+
+    public static void parseAndPrintNumber(String str) {
+//turn into non-static
+        int a = Integer.parseInt(str);
+        System.out.println(a / 2);
+    }
+
+    public static boolean isPalindrome(String text) {
+        String s = text.replaceAll("[^a-zA-Z0-9]", "");
+        String reversed = "";
+        for (int i = 0; i < s.length(); i++) {
+            reversed = s.charAt(i) + reversed;
+        }
+        if (s.equalsIgnoreCase(reversed)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isGmailOrOutlook(String email) {
+        Pattern pt = Pattern.compile("^[a-z0-9_.-]+@(gmail\\.com|outlook\\.com)$");
+        Matcher mt = pt.matcher(email);
+        return mt.matches();
+    }
+
+    public static String printTextPerRole(String[] roles, String[] textLines) {
+        //        StringBuilder sb = new StringBuilder();
+//        int counter = 0;
+////        String strRole = roles[counter];
+//        for (String str : roles) {
+//            str = roles[counter];
+//            counter++;
+//            System.out.println(str);
+//
+//        }
+//        counter = 0;
+//        System.out.println(strRole);
+//        for (String str : textLines) {
+//            str = textLines[counter];
+//            sb.append(counter++);
+//            sb.append(")");
+//            sb.append(str);
+//            sb.append("\n");
+//            System.out.println(str);
+//        }
+
+//        StringBuilder sb = new StringBuilder();
+//        int counter = 1;
+//        for (int i = 0; i < roles.length; i++) {
+//            String strRole = roles[i];
+//            sb.append(roles[i]);
+//            sb.append(":");
+//            sb.append("\n");
+//            for (int j = 0; j < textLines.length; j++) {
+//                String strLines = textLines[j];
+//                if (textLines[j].startsWith(strRole + ":")) {
+//                    sb.append((j + 1) + ")" + strLines.substring(strRole.length() + 1) + "\n");
+//                }
+//            }
+//            sb.append("\n");
+//        }
+//        return sb.toString();
+//    }
+
+        //                } else if (textLines[j].contains(nameInMiddleArray)) {
+////                    sb.append(roles[i] = textLines[j]).append(":\n");
+//                    sb.append("have it");
+//                }
+
+//        StringBuilder sb = new StringBuilder();
+//
+//
+//        for (int i = 0; i < textLines.length; i++) {
+//            textLines[i] = i + 1 + ")" + textLines[i];
+//        }
+//        for (int i = 0; i < roles.length; i++) {
+//            sb.append(roles[i]).append(":\n");
+//            for (int j = 0; j < textLines.length; j++) {
+//                if (textLines[j].contains(roles[i] + ":")) {
+//                    sb.append(textLines[j].replace(roles[i] + ":", "")).append("\n");
+//                    textLines[j] = "";
+//                }
+//            }
+//
+//            sb.append("\n");
+//        }
+//        return sb.toString();
+        StringBuilder sb = new StringBuilder();
+        int counter = 1;
+        for (int i = 0; i < roles.length; i++) {
+            String strRole = roles[i];
+            sb.append(roles[i]);
+            sb.append(":");
+            sb.append("\n");
+            for (int j = 0; j < textLines.length; j++) {
+                String strLines = textLines[j];
+                if (textLines[j].startsWith(strRole + ":")) {
+                    sb.append((j + 1) + ")" + strLines.substring(strRole.length() + 1) + "\n");
+                }
+            }
+            sb.append("\n");
+        }
+        String result = sb.toString().trim();
+        return result;
     }
 }
