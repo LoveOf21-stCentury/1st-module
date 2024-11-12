@@ -11,14 +11,15 @@ public class Main {
 //        System.out.println(doubleExpression(3, 6, 2));
 //        calcCircleRadius(123);
 //        maxLongSqr();
-//        System.out.println(charExpression(3));
+//        System.out.println(charExpression(6));
 //        System.out.println(getAgeDiff((byte) 4, (byte) 1));
 //        System.out.println(isPowerOfTwo(1));
-//        System.out.println(factorialRecur(3));
+//        System.out.println(factorialRecur(1));
 //        System.out.println(determineGroup(77));
 //        System.out.println(isWeekend("Sunday"));
 //        System.out.println(checkWeekend("Sunday"));
-//        int arr[] = new int[]{13,-25,-13,91,99};
+        int[] arr = new int[]{13, 95, 91, 99, 45};
+        int[] arr2 = new int[]{5, 63, 9, 6};
 //        printArray(arr);
 //        printArray(arr2);
 //        getSubArrayBetween(arr, 4, 10);
@@ -73,22 +74,22 @@ public class Main {
     }
 
     public static char charExpression(int a) {
-        int c = '\\';
-        int result = c + a;
-        return (char) result;
+//        int c = '\\';
+//        int result = c + a;
+//        return (char) result;
+        return (char) ('\\' + a);
     }
 
     public static byte getAgeDiff(byte age1, byte age2) {
-        byte result = (byte) (age1 - age2);
-
-        return (byte) Math.abs(result);
+        return (byte) Math.abs((byte) (age1 - age2));
     }
 
     public static boolean isPowerOfTwo(int value) {
-        boolean flag;
-        value = Math.abs(value);
-        flag = Integer.bitCount(value) == 1;
-        return flag;
+//        boolean flag;
+//        value = Math.abs(value);
+//        flag = Integer.bitCount(value) == 1;
+//        return flag;
+        return Integer.bitCount(Math.abs(value)) == 1 ? true : false;
     }
 
     public static BigInteger factorial(int value) {
@@ -100,12 +101,10 @@ public class Main {
     }
 
     public static BigInteger factorialRecur(int value) {
-        BigInteger fact = BigInteger.ONE;
         if (value == 1 || value == 0) {
-            return BigInteger.valueOf(1);
+            return BigInteger.ONE;
         } else {
-            fact = factorialRecur(value - 1).multiply(BigInteger.valueOf(value));
-            return fact;
+            return factorialRecur(value - 1).multiply(BigInteger.valueOf(value--));
         }
     }
 
@@ -126,13 +125,18 @@ public class Main {
     }
 
     public static boolean isWeekend(String weekday) {
-        boolean result;
-        switch (weekday) {
-            case "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" -> result = false;
-            case "Saturday", "Sunday" -> result = true;
+//        boolean result;
+//        switch (weekday) {
+//            case "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" -> result = false;
+//            case "Saturday", "Sunday" -> result = true;
+//            default -> throw new IllegalStateException("Unexpected value: " + weekday);
+//        }
+//        return result;
+        return switch (weekday) {
+            case "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" -> false;
+            case "Saturday", "Sunday" -> true;
             default -> throw new IllegalStateException("Unexpected value: " + weekday);
-        }
-        return result;
+        };
     }
 
     public static boolean isWeekendStr(String weekDayNumber) {
@@ -148,16 +152,14 @@ public class Main {
     }
 
     public static void printArray(int[] numbers) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
+        System.out.print("[");
         for (int i = 0; i < numbers.length; i++) {
-            sb.append(numbers[i]);
+            System.out.print(numbers[i]);
             if (i < numbers.length - 1) {
-                sb.append(", ");
+                System.out.print(", ");
             }
         }
-        sb.append("]");
-        System.out.println(sb);
+        System.out.println("]");
     }
 
     public static int[] getSubArrayBetween(int[] numbers, int start, int end) {
@@ -189,32 +191,25 @@ public class Main {
     }
 
     public static int[] getArrayMiddle(int[] numbers) {
-        boolean isEmpty = numbers.length == 0;
-        if (isEmpty) {
+        if (numbers.length == 0) {
             return numbers;
         }
-        int counter = numbers.length;
+
         int halfArray = numbers.length / 2;
-        int size = 0;
-
-        if (counter % 2 == 0) {
-            size = 2;
-        } else {
-            size = 1;
-        }
-
+        int size = (numbers.length % 2 == 0) ? 2 : 1;
         int[] res = new int[size];
-        int index = 0;
+
         for (int i = 0; i < res.length; i++) {
             if (size == 2) {
-                res[index] = numbers[halfArray - 1];
-                res[index + 1] = numbers[halfArray];
+                res[0] = numbers[halfArray - 1];
+                res[1] = numbers[halfArray];
             } else {
-                res[index] = numbers[halfArray];
+                res[0] = numbers[halfArray];
             }
-        }
-        for (int a : res) {
-            System.out.print(a + " ");
+            System.out.print(res[i]);
+            if (i < res.length - 1) {
+                System.out.print(", ");
+            }
         }
         return res;
     }
@@ -265,30 +260,22 @@ public class Main {
     }
 
     public static int[] getArrayMiddleClass(int[] numbers) {
-        boolean isEmpty = numbers.length == 0;
-        if (isEmpty) {
+        if (numbers.length == 0) {
             return numbers;
         }
-        int counter = numbers.length;
-        int size = 0;
-        if (counter % 2 == 0) {
-            size = 2;
+        int middleEl = numbers.length / 2;
+        if (numbers.length % 2 == 0) {
+            System.out.println(Arrays.toString(Arrays.copyOfRange(numbers, middleEl - 1, middleEl + 1)));
+            return Arrays.copyOfRange(numbers, middleEl - 1, middleEl + 1);
         } else {
-            size = 1;
+            System.out.println(Arrays.toString(new int[]{numbers[middleEl]}));
+            return new int[]{numbers[middleEl]};
         }
-        int[] res = new int[size];
-        if (size == 2) {
-            System.arraycopy(numbers, numbers.length / 2 - 1, res, 0, size);
-        } else {
-            System.arraycopy(numbers, numbers.length / 2, res, 0, size);
-        }
-        System.out.println(Arrays.toString(res));
-        return res;
     }
 
     public static int[] mergeAndSortClass(int[] firstArray, int[] secondArray) {
         int[] res = new int[firstArray.length + secondArray.length];
-        System.arraycopy(firstArray, 0, res, 0, firstArray.length);
+        res = Arrays.copyOf(firstArray, res.length);
         System.arraycopy(secondArray, 0, res, firstArray.length, secondArray.length);
         Arrays.sort(res);
         return res;
@@ -341,16 +328,19 @@ public class Main {
     }
 
     public static boolean isPalindrome(String text) {
-        String s = text.replaceAll("[^a-zA-Z0-9]", "");
-        String reversed = "";
-        for (int i = 0; i < s.length(); i++) {
-            reversed = s.charAt(i) + reversed;
-        }
-        if (s.equalsIgnoreCase(reversed)) {
-            return true;
-        } else {
-            return false;
-        }
+//        String s = text.replaceAll("[^a-zA-Z0-9]", "");
+//        String reversed = "";
+//        for (int i = 0; i < s.length(); i++) {
+//            reversed = s.charAt(i) + reversed;
+//        }
+//        if (s.equalsIgnoreCase(reversed)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+        String s = text.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        StringBuilder sb = new StringBuilder();
+        return s.equals(sb.reverse().toString());
     }
 
     public static boolean isGmailOrOutlook(String email) {
@@ -360,83 +350,19 @@ public class Main {
     }
 
     public static String printTextPerRole(String[] roles, String[] textLines) {
-        //        StringBuilder sb = new StringBuilder();
-//        int counter = 0;
-////        String strRole = roles[counter];
-//        for (String str : roles) {
-//            str = roles[counter];
-//            counter++;
-//            System.out.println(str);
-//
-//        }
-//        counter = 0;
-//        System.out.println(strRole);
-//        for (String str : textLines) {
-//            str = textLines[counter];
-//            sb.append(counter++);
-//            sb.append(")");
-//            sb.append(str);
-//            sb.append("\n");
-//            System.out.println(str);
-//        }
-
-//        StringBuilder sb = new StringBuilder();
-//        int counter = 1;
-//        for (int i = 0; i < roles.length; i++) {
-//            String strRole = roles[i];
-//            sb.append(roles[i]);
-//            sb.append(":");
-//            sb.append("\n");
-//            for (int j = 0; j < textLines.length; j++) {
-//                String strLines = textLines[j];
-//                if (textLines[j].startsWith(strRole + ":")) {
-//                    sb.append((j + 1) + ")" + strLines.substring(strRole.length() + 1) + "\n");
-//                }
-//            }
-//            sb.append("\n");
-//        }
-//        return sb.toString();
-//    }
-
-        //                } else if (textLines[j].contains(nameInMiddleArray)) {
-////                    sb.append(roles[i] = textLines[j]).append(":\n");
-//                    sb.append("have it");
-//                }
-
-//        StringBuilder sb = new StringBuilder();
-//
-//
-//        for (int i = 0; i < textLines.length; i++) {
-//            textLines[i] = i + 1 + ")" + textLines[i];
-//        }
-//        for (int i = 0; i < roles.length; i++) {
-//            sb.append(roles[i]).append(":\n");
-//            for (int j = 0; j < textLines.length; j++) {
-//                if (textLines[j].contains(roles[i] + ":")) {
-//                    sb.append(textLines[j].replace(roles[i] + ":", "")).append("\n");
-//                    textLines[j] = "";
-//                }
-//            }
-//
-//            sb.append("\n");
-//        }
-//        return sb.toString();
         StringBuilder sb = new StringBuilder();
-        int counter = 1;
-        for (int i = 0; i < roles.length; i++) {
-            String strRole = roles[i];
-            sb.append(roles[i]);
-            sb.append(":");
-            sb.append("\n");
+        for (String strRole : roles) {
+            sb.append(strRole).append(":\n");
             for (int j = 0; j < textLines.length; j++) {
                 String strLines = textLines[j];
                 if (textLines[j].startsWith(strRole + ":")) {
-                    sb.append((j + 1) + ")" + strLines.substring(strRole.length() + 1) + "\n");
+                    sb.append((j + 1)).append(") ").append(strLines.substring(strRole.length() + 1).trim()).append("\n");
                 }
             }
             sb.append("\n");
         }
-        String result = sb.toString().trim();
-        return result;
+        return sb.toString().trim();
     }
+
+
 }
