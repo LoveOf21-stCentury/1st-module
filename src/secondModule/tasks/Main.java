@@ -1,4 +1,4 @@
-package secondModule;
+package secondModule.tasks;
 
 public class Main {
     public static class Cat {
